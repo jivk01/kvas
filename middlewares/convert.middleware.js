@@ -25,7 +25,15 @@ ${Math.round(kvasses * 1.5 * 10) / 10}-${Math.round(kvasses * 2 * 10) / 10} дн
 ${Math.round(kvasses / 2 * 10) / 10} днів в компанії`
 
     const message_id = ctx.message.message_id
-    await ctx.reply(message, {reply_to_message_id: message_id, parse_mode: "HTML"})
+    try {
+        await ctx.reply(message, {reply_to_message_id: message_id, parse_mode: "HTML"})
+    } catch (e) {
+        console.error(e)
+        try {
+            await ctx.reply("Сталася помилка", {reply_to_message_id: ctx.message.message_id})
+        } catch {}
+    }
+    
 })
 
 export default composer
